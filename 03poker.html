@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+</html>
+<script>
+    // 共15根牙签,定义三个牙签数组,表示三行
+    var arr1 = new Array(3);
+    arr1.fill("牙签");
+    var arr2 = new Array(5);
+    arr2.fill("牙签");
+    var arr3 = new Array(7);
+    arr3.fill("牙签");
+    //三个牙签数组放在一个大数组里面
+    var arr = [ arr1, arr2, arr3 ];
+
+    // arr深拷贝得到arr2为了输出验证结果是否正确
+    var arr2 = JSON.parse( JSON.stringify(arr));
+    console.log("牙签数组为");
+    console.log( arr2 );
+    console.log("");
+    //定义一个得到随机整数的函数
+    function getRandom(min,max){
+        return Math.floor( Math.random()*(max -min+ 1)+min);
+    }
+    //玩家数组
+    var players = ["A玩家","B玩家"];
+    // num全局变量
+    var num= 0;
+    while( arr[0].length+ arr[1].length+arr[2].length!= 0 ){
+        var randomRow = getRandom(0,arr.length-1);
+        // console.log("randomRow=> ",randomRow);
+        //任意行中任意根牙签
+        var randomNumToothpick = getRandom(1,arr[randomRow].length);
+        // console.log(" randomNumToothpick= > *,randomNumToothpick);
+        // num进行2取模
+        var index = num % 2;
+        console.log(`第${num+1}轮, ${players[index]}玩家拿了第${randomRow+1}行的${randomNumToothpick}牙签`);
+        // num自加1
+        num++;
+        //从数组中剔除已经拿掉的牙签
+        arr[randomRow].splice(0,randomNumToothpick);
+        console.log("");
+    }
+</script>
